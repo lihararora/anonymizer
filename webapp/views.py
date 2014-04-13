@@ -13,6 +13,11 @@ def index(request):
     #return render(request, 'webapp/index.html', context)
     return render_to_response('webapp/html/login.html',{},context_instance=RequestContext(request))
 
+def explorer(request):
+    #context = {}
+    #return render(request, 'webapp/index.html', context)
+    return render_to_response('webapp/html/explorer.html',{},context_instance=RequestContext(request))
+
 def login(request):
     str = 'Invalid username/password'
     try:

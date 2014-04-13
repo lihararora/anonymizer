@@ -9,5 +9,6 @@ from webapp import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'explorer/', views.explorer, name='explorer'),
     url(r'login/', views.login, name='login')
 ]
