@@ -82,4 +82,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #Absolute path to your twitter bootstrap directory
-STATICFILES_DIRS = ( 'C:/Users/Ankit/git/anonymizer/webapp/templates/bootstrap', )
+STATICFILES_DIRS = ( '/home/rahil/git/anonymizer/webapp/templates', )
