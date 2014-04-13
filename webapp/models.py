@@ -5,7 +5,7 @@ from django.db import models
 class User(models.Model):
     ROLE_CHOICES = (
                     ('Doctor','Doctor'),
-                    ('Nurse','Nurse'),
+                    ('Staff','Staff'),
                     ('Management','Management'),
                     ('Researcher','Researcher'),
                     )

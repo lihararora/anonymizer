@@ -42,7 +42,6 @@ INSTALLED_APPS = (
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -82,4 +81,7 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 #Absolute path to your twitter bootstrap directory
-STATICFILES_DIRS = ( '/home/rahil/git/anonymizer/webapp/templates', )
+STATICFILES_DIRS = ( 'C:/Users/Ankit/git/anonymizer/webapp/templates', )
+#STATICFILES_DIRS = ( '/home/rahil/git/anonymizer/webapp/templates', )
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.file'

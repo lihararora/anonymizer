@@ -12,20 +12,29 @@
   	</head>
   	<body>
 		<div class="wrapper wrap">
-		    <form class="form-signin">       
+			<div class="navbar topbar">
+	  			<div class="container-fluid" style="margin-top:5px; margin-left: 10px;">
+	  				<span style="font-size: 34px">Anonymizer</span>
+	  				<span style="float: right; font-size: 18px; margin-top: 13px; margin-right: 10px; text-decoration: underline;">
+	  					<span style="margin-right: 15px">About Us</span>
+	  					<span>Help</span>
+	  				</span>
+	  			</div>
+	  		</div>
+		    <form class="form-signin" action="login/" method="POST">       
 		      <h2 class="form-signin-heading">Please login</h2>
-		      <input type="text" class="form-control" name="username" placeholder="Email Address" required="" autofocus="" />
+		      <input type="text" class="form-control" style="margin-bottom: 10px" name="username" placeholder="Username" required="" autofocus="" />
 		      <input type="password" class="form-control" name="password" placeholder="Password" required=""/>      
 		      <label class="checkbox">
 		        <input type="checkbox" value="remember-me" id="rememberMe" name="rememberMe"> Remember me
 		      </label>
-		      <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>   
+		      <button class="btn btn-success btn-primary btn-block" type="submit">Login</button>   
 		    </form>
 		    <div class="push"></div>
 		</div>
 		<div id="footer">
 			 <div class="container">
-			 	<p class="muted credit">Healthcare Security Management Project | &copy; Ankit Sharma and Rahil Arora.</p>
+			 	<p class="muted credit">&copy; 2014 Ankit Sharma and Rahil Arora | Healthcare Security Management Project</p>
 			 </div>
 		</div>
 	</body>

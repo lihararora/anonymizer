@@ -9,16 +9,16 @@ body {
 }
 
 .wrapper {	
-	margin-top: 80px;
-  margin-bottom: 80px;
+	padding-top: 0px;
 }
 
 .form-signin {
+  margin-top: 20px;
   max-width: 380px;
   padding: 15px 35px 45px;
   margin: 0 auto;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,0.1);  
+  border: 1px solid rgba(0,0,0,0.2);  
 
   .form-signin-heading,
 	.checkbox {
@@ -54,3 +54,12 @@ body {
 	}
 }
 
+.topbar
+{
+	margin-bottom: 50px !important;
+	border-radius: 0px !important;
+	background-color: white;
+	-webkit-box-shadow: 0 3px 3px #ccc;
+	-moz-box-shadow: 0 3px 3px #ccc;
+	box-shadow: 0 3px 3px #ccc;
+}
