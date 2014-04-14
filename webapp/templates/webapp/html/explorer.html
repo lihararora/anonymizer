@@ -1,9 +1,10 @@
+<!DOCTYPE html>
 <html lang="en">
 	<head>
     	<meta charset="utf-8">
     	<meta http-equiv="X-UA-Compatible" content="IE=edge">
     	<meta name="viewport" content="width=device-width, initial-scale=1">
-    	<title>Document Explorer</title>
+    	<title>Explorer</title>
 
     	<!-- Bootstrap -->
     	<link href="/static/webapp/css/main.css" rel="stylesheet">
@@ -12,14 +13,48 @@
   	</head>
   	<body>
 		<div class="container-fluid">
-		  <div class="row-fluid">
-		    <div class="span2">
-		      a<!--Sidebar content-->
-		    </div>
-		    <div class="span10">
-		      b<!--Body content-->
-		    </div>
-		  </div>
+			<div class="row">
+				<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+					<div class="container-fluid">
+					    <!-- Brand and toggle get grouped for better mobile display -->
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+						    <span class="sr-only">Toggle navigation</span>
+						    <span class="icon-bar"></span>
+						    <span class="icon-bar"></span>
+						    <span class="icon-bar"></span>
+						  </button>
+						  <a class="navbar-brand" style="font-size: 26px" href="#">Anonymizer</a>
+						</div>
+						
+						<!-- Collect the nav links, forms, and other content for toggling -->
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+							<ul class="nav navbar-nav">
+						      <li><a href="#"><i style="margin-top: 3px" class="icon-white icon-plus-sign"></i> New</a></li>
+						      <li><a href="#">Link</a></li>
+						      <li class="dropdown">
+						        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
+						        <ul class="dropdown-menu">
+						          <li><a href="#">Action</a></li>
+						          <li><a href="#">Another action</a></li>
+						          <li><a href="#">Something else here</a></li>
+						          <li class="divider"></li>
+						          <li class="dropdown-header">Dropdown header</li>
+						          <li><a href="#">Separated link</a></li>
+						          <li><a href="#">One more separated link</a></li>
+						        </ul>
+						      </li>
+						    </ul>
+							<button type="button" style="margin-left:20px" class="navbar-right btn btn-inverse btn-sm navbar-btn">Sign out</button>
+							<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+						</div><!-- /.navbar-collapse -->
+					</div><!-- /.container-fluid -->
+				</nav>
+			</div>
+			<div class="row">
+			  <div class="col-md-8">.col-md-8</div>
+			  <div class="col-md-4">.col-md-4</div>
+			</div>
 		</div>
 		<div id="footer">
 			 <div class="container">
@@ -27,3 +62,4 @@
 			 </div>
 		</div>
 	</body>
+</html>
