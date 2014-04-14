@@ -35,25 +35,18 @@
 						</div>
 						
 						<!-- Collect the nav links, forms, and other content for toggling -->
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index: 1000 !important">
 							<ul class="nav navbar-nav">
-						      <li><a href="#"><i style="margin-top: 3px" class="glyphicon glyphicon-plus-sign"></i> New</a></li>
-						      <li><a href="#">Link</a></li>
-						      <li class="dropdown">
-						        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <b class="caret"></b></a>
-						        <ul class="dropdown-menu">
-						          <li><a href="#">Action</a></li>
-						          <li><a href="#">Another action</a></li>
-						          <li><a href="#">Something else here</a></li>
-						          <li class="divider"></li>
-						          <li class="dropdown-header">Dropdown header</li>
-						          <li><a href="#">Separated link</a></li>
-						          <li><a href="#">One more separated link</a></li>
-						        </ul>
-						      </li>
+						      <li><a href="#"><span style="top: 2px" class="glyphicon glyphicon-plus-sign"></span>  New</a></li>   
 						    </ul>
-							<button type="button" style="margin-left:20px" class="navbar-right btn btn-inverse btn-sm navbar-btn">Sign out</button>
-							<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+						    <form class="navbar-form navbar-left" style="width: 100%; text-align: center; position: absolute; top: 0px; left: 0px; z-index: -1">
+						    	<div style="text-align: center; float: none">
+						    		<input type="text" class="form-control col-sm-1" style="z-index: 1001;float: none; padding-top: 0px; padding-bottom: 0px; height: 30px; margin-top: 6px" placeholder="Search">
+						    		<button type="button" style="float: none; margin: 0px; margin-top: 5px; z-index: 1001;" class="btn btn-default btn-sm navbar-btn">Search</button>
+						    	</div>
+						    </form>
+							<button type="button" style="margin-left:20px" class="navbar-right btn btn-default btn-sm navbar-btn" onclick="window.location='/logout/'">Sign out</button>
+							<p class="navbar-text navbar-right"><a href="#" class="navbar-link">Mark Otto</a></p>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
 				</nav>
