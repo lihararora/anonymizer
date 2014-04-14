@@ -20,6 +20,12 @@ def explorer(request):
     else:
         return render_to_response('webapp/html/login.html',{},context_instance=RequestContext(request))
 
+def editor(request):
+    if "username" in request.session:
+        return render_to_response('webapp/html/editor.html',{},context_instance=RequestContext(request))
+    else:
+        return render_to_response('webapp/html/login.html',{},context_instance=RequestContext(request))
+
 def login(request):
     print "Login Ca"
     success = False
