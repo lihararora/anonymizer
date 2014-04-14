@@ -8,15 +8,12 @@
 
     	<!-- Bootstrap -->
     	<link href="/static/webapp/css/main.css" rel="stylesheet">
-    	<link href="/static/webapp/css/editor.css" rel="stylesheet">
     	<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    	<link href="/static/webapp/css/editor.css" rel="stylesheet">
     	<script type="text/javascript" src="/static/bootstrap/js/jquery-2.1.0.min.js"></script>
+    	<script type="text/javascript" src="/static/bootstrap/js/jquery.hotkeys.js"></script>
+    	<script type="text/javascript" src="/static/bootstrap/js/slimscroll.js"></script>
     	<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
-    	<style type="text/css">
-    		.panel:HOVER{
-    			cursor: pointer;
-    		}
-    	</style>
   	</head>
   	<body>
 		<div class="container-fluid">
@@ -54,11 +51,46 @@
 			</div>
 			<div class="row">
 				<div class="col-md-5" style="height: 500px;">
+					<div class="btn-toolbar btn-inverse" style="margin-bottom: 10px;" data-role="editor-toolbar" data-target="#editor">
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font"><i class="glyphicon glyphicon-font"></i><b class="caret"></b></a>
+						    <ul class="dropdown-menu">
+						    <li><a data-edit="fontName Serif" style="font-family:'Serif'">Serif</a></li><li><a data-edit="fontName Sans" style="font-family:'Sans'">Sans</a></li><li><a data-edit="fontName Arial" style="font-family:'Arial'">Arial</a></li><li><a data-edit="fontName Arial Black" style="font-family:'Arial Black'">Arial Black</a></li><li><a data-edit="fontName Courier" style="font-family:'Courier'">Courier</a></li><li><a data-edit="fontName Courier New" style="font-family:'Courier New'">Courier New</a></li><li><a data-edit="fontName Comic Sans MS" style="font-family:'Comic Sans MS'">Comic Sans MS</a></li><li><a data-edit="fontName Helvetica" style="font-family:'Helvetica'">Helvetica</a></li><li><a data-edit="fontName Impact" style="font-family:'Impact'">Impact</a></li><li><a data-edit="fontName Lucida Grande" style="font-family:'Lucida Grande'">Lucida Grande</a></li><li><a data-edit="fontName Lucida Sans" style="font-family:'Lucida Sans'">Lucida Sans</a></li><li><a data-edit="fontName Tahoma" style="font-family:'Tahoma'">Tahoma</a></li><li><a data-edit="fontName Times" style="font-family:'Times'">Times</a></li><li><a data-edit="fontName Times New Roman" style="font-family:'Times New Roman'">Times New Roman</a></li><li><a data-edit="fontName Verdana" style="font-family:'Verdana'">Verdana</a></li></ul>
+						  </div>
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" title="" data-original-title="Font Size"><i class="glyphicon glyphicon-text-height"></i>&nbsp;<b class="caret"></b></a>
+						    <ul class="dropdown-menu">
+						    <li><a data-edit="fontSize 5"><font size="5">Huge</font></a></li>
+						    <li><a data-edit="fontSize 3"><font size="3">Normal</font></a></li>
+						    <li><a data-edit="fontSize 1"><font size="1">Small</font></a></li>
+						    </ul>
+						</div>
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm" data-edit="bold" title="" data-original-title="Bold (Ctrl/Cmd+B)"><i class="glyphicon glyphicon-bold"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="italic" title="" data-original-title="Italic (Ctrl/Cmd+I)"><i class="glyphicon glyphicon-italic"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="underline" title="" data-original-title="Underline (Ctrl/Cmd+U)"><i class="glyphicon glyphicon-magnet"></i></a>
+						</div>
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm" data-edit="insertunorderedlist" title="" data-original-title="Bullet list"><i class="glyphicon glyphicon-th-list"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
+						</div>
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm btn-info" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="justifycenter" title="" data-original-title="Center (Ctrl/Cmd+E)"><i class="glyphicon glyphicon-align-center"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="justifyright" title="" data-original-title="Align Right (Ctrl/Cmd+R)"><i class="glyphicon glyphicon-align-right"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="justifyfull" title="" data-original-title="Justify (Ctrl/Cmd+J)"><i class="glyphicon glyphicon-align-justify"></i></a>
+						</div>
+						<div class="btn-group">
+						  <a class="btn btn-default btn-sm" data-edit="undo" title="" data-original-title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-repeat flipped"></i></a>
+						  <a class="btn btn-default btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-repeat"></i></a>
+						</div>
+				    </div>
 					<div id="editor"></div>
 				</div>
   				<div class="col-md-3" style="height: 500px;">
 					<table class="table table-striped">
-							<tr>
+							<tr style="margin-bottom: 10px;">
 								<th>Entity</th>
 								<th>Type</th>
 								<th>Sensitivity</th>
@@ -92,5 +124,13 @@
 				</div>
 			</div>
 		</div>
+		<script type="text/javascript" src="/static/webapp/js/editor.js"></script>
+		<script type="text/javascript">
+	    	$("#editor").wysiwyg();
+	    	$('#editor').slimScroll({
+	    	    railVisible: true,
+	    	    alwaysVisible: true
+	        });
+	    </script>
 	</body>
 </html>
