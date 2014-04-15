@@ -28,23 +28,19 @@
 						    <span class="icon-bar"></span>
 						    <span class="icon-bar"></span>
 						  </button>
-						  <a class="navbar-brand" style="font-size: 26px" href="#">Anonymizer</a>
+						  <a class="navbar-brand" style="font-size: 26px" href="/explorer/">Anonymizer</a>
 						</div>
 						
 						<!-- Collect the nav links, forms, and other content for toggling -->
 						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1" style="z-index: 1000 !important">
 							<ul class="nav navbar-nav">
-						      <li><a href="#"><span style="top: 2px" class="glyphicon glyphicon-plus-sign"></span>  New</a></li>   
+						      <li><a href="#" data-toggle="modal" data-target="#newform"><span style="top: 2px" class="glyphicon glyphicon-plus-sign"></span>  New</a></li>
 						    </ul>
 						    <ul class="nav navbar-nav">
-						      <li><a href="#"><span style="top: 2px" class="glyphicon glyphicon-floppy-disk"></span>  Save</a></li>   
-						    </ul>
-						    
-						    <ul class="nav navbar-nav">
-						      <li><a href="#"><span style="top: 2px" class="glyphicon glyphicon-save"></span>  Download as PDF</a></li>   
+						      <li><a href="#" data-toggle="modal" data-target="#saveform"><span style="top: 2px" class="glyphicon glyphicon-floppy-disk"></span>  Save</a></li>   
 						    </ul>
 							<button type="button" style="margin-left:20px" class="navbar-right btn btn-default btn-sm navbar-btn" onclick="window.location='/logout/'">Sign out</button>
-							<p class="navbar-text navbar-right"><a href="#" class="navbar-link">Mark Otto</a></p>
+							<p class="navbar-text navbar-right"><a href="#" class="navbar-link">{{ request.session.firstname }} {{ request.session.lastname }}</a></p>
 						</div><!-- /.navbar-collapse -->
 					</div><!-- /.container-fluid -->
 				</nav>
@@ -86,7 +82,7 @@
 						  <a class="btn btn-default btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-repeat"></i></a>
 						</div>
 				    </div>
-					<div id="editor"></div>
+					<div id="editor">{{ file_contents|safe }}</div>
 				</div>
   				<div class="col-md-3" style="height: 500px;">
 					<table class="table table-striped">
@@ -124,6 +120,48 @@
 				</div>
 			</div>
 		</div>
+		<div class="modal" id="newform">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">New Document</h4>
+		      </div>
+		      <form action="/editor/" method="post" enctype="multipart/form-data">
+			      <div class="modal-body">
+			        <p>Select a document to upload <input class="btn btn-primary" style="display: inline;" type="file" name='file' value="Choose File"/> </p>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			        <button type="submit" class="btn btn-primary">Upload</button>
+			      </div>
+			   </form>
+		    </div>
+		  </div>
+		</div>
+		<div class="modal" id="saveform">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		        <h4 class="modal-title">Save Document</h4>
+		      </div>
+		      <form action="/save/" method="post" onsubmit="getContent()">
+			      <div class="modal-body">
+			        <div class="form-group">
+					  <label class="control-label" for="focusedInput">Filename</label>
+					  <input class="form-control" id="focusedInput" name="filename" type="text" value="">
+					  <input type="hidden" id="content" name="content" value="">
+					</div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+			        <button type="submit" class="btn btn-primary">Save</button>
+			      </div>
+			   </form>
+		    </div>
+		  </div>
+		</div>
 		<script type="text/javascript" src="/static/webapp/js/editor.js"></script>
 		<script type="text/javascript">
 	    	$("#editor").wysiwyg();
@@ -131,6 +169,14 @@
 	    	    railVisible: true,
 	    	    alwaysVisible: true
 	        });
+	    	
+	    	function getContent()
+	    	{
+	    		var c;
+	    		c = document.getElementById('editor').innerHTML;
+	    		document.getElementById('content').value = c;
+	    		return true;
+	    	}
 	    </script>
 	</body>
 </html>
