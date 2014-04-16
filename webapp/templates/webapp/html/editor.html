@@ -68,8 +68,6 @@
 						</div>
 						<div class="btn-group">
 						  <a class="btn btn-default btn-sm" data-edit="insertunorderedlist" title="" data-original-title="Bullet list"><i class="glyphicon glyphicon-th-list"></i></a>
-						  <a class="btn btn-default btn-sm" data-edit="outdent" title="" data-original-title="Reduce indent (Shift+Tab)"><i class="glyphicon glyphicon-indent-left"></i></a>
-						  <a class="btn btn-default btn-sm" data-edit="indent" title="" data-original-title="Indent (Tab)"><i class="glyphicon glyphicon-indent-right"></i></a>
 						</div>
 						<div class="btn-group">
 						  <a class="btn btn-default btn-sm btn-info" data-edit="justifyleft" title="" data-original-title="Align Left (Ctrl/Cmd+L)"><i class="glyphicon glyphicon-align-left"></i></a>
@@ -85,38 +83,24 @@
 					<div id="editor">{{ file_contents|safe }}</div>
 				</div>
   				<div class="col-md-3" style="height: 500px;">
-					<table class="table table-striped">
-							<tr style="margin-bottom: 10px;">
-								<th>Entity</th>
-								<th>Type</th>
-								<th>Sensitivity</th>
-							</tr>
-							<tr>
-								<td>1 </td>
-								<td>a </td>
-								<td>b </td>
-							</tr>
-							<tr>
-								<td>1 </td>
-								<td>a </td>
-								<td>b </td>
-							</tr>
-							<tr>
-								<td>1 </td>
-								<td>a </td>
-								<td>b </td>
-							</tr>
-							<tr>
-								<td>1 </td>
-								<td>a </td>
-								<td>b </td>
-							</tr>
-							<tr>
-								<td>1 </td>
-								<td>a </td>
-								<td>b </td>
+					<table class="table table-striped" style="margin-bottom: 0px">
+							<tr style="margin-bottom: 10px;" class="success">
+								<td style="width: 42% !important">Entity</th>
+								<td style="width: 38% !important">Type</th>
+								<td style="width: 20% !important">Sensitivity</th>
 							</tr>
 					</table>
+					<div id="entity_scroll">
+						<table class="table table-striped">
+							{% for entity in named_entities %}
+								<tr>
+									<td style="width: 40% !important">{{entity.name}}</td>
+									<td style="width: 40% !important">{{entity.type}}</td>
+									<td style="width: 20% !important">{{entity.sensitivity}}</td>
+								</tr>
+							{% endfor %}
+						</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -166,6 +150,10 @@
 		<script type="text/javascript">
 	    	$("#editor").wysiwyg();
 	    	$('#editor').slimScroll({
+	    	    railVisible: true,
+	    	    alwaysVisible: true
+	        });
+	    	$('#entity_scroll').slimScroll({
 	    	    railVisible: true,
 	    	    alwaysVisible: true
 	        });

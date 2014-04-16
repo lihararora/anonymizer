@@ -5,6 +5,7 @@ from webapp.models import User, Document
 import hashlib
 from django.http.response import HttpResponse
 from xhtml2pdf import pisa
+import nlp
 
 #pass context_instance=RequestContext(request) as 3rd argument
 
@@ -26,8 +27,9 @@ def editor(request):
     f = request.FILES['file']
     content = f.read()
     content = content.replace('\n', '<br/>')
+    entities = nlp.get_names(content)
     if "username" in request.session:
-        return render_to_response('webapp/html/editor.html',{"file_contents":content},context_instance=RequestContext(request))
+        return render_to_response('webapp/html/editor.html',{"file_contents":content, "named_entities": entities},context_instance=RequestContext(request))
     else:
         return render_to_response('webapp/html/login.html',{},context_instance=RequestContext(request))
 
