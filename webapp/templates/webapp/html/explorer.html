@@ -71,12 +71,14 @@
 				{% for document in documents %}
 					<div class="col-xs-1">
 							<div class="panel panel-default">
-					  <div class="panel-body" style="text-align: center; position: relative">
+					  <a href="/viewer/{{ document.document_id }}">
+					    <div class="panel-body" style="text-align: center; position: relative">
 					    <img alt="" src="/static/webapp/img/file_icon.png" style="width: 70%" />
 					    <!-- <div class="download"><a href="#" style="color: white" class="glyphicon glyphicon-save" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Download as PDF"></a></div>-->
 					  	<a href="/download/{{ document.document_id }}" class="btn download" style="color: white" data-toggle="tooltip" data-placement="bottom" title="" data-original-title="Download as PDF"><span class="glyphicon glyphicon-save" style="margin-left: 1px"></span></a>
 					  </div>
 					  <div class="panel-heading btn-xs" style="padding-top: 5px; padding-bottom: 5px; text-align: center;">{{ document.file_name }}</div>
+					  </a>
 					</div>
 					</div>
 				{% endfor %}
