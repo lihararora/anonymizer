@@ -4,10 +4,10 @@ from django.db import models
 
 class User(models.Model):
     ROLE_CHOICES = (
-                    ('Doctor','Doctor'),
-                    ('Staff','Staff'),
-                    ('Management','Management'),
-                    ('Researcher','Researcher'),
+                    ('1','Doctor'),
+                    ('2','Staff'),
+                    ('3','Management'),
+                    ('4','Researcher'),
                     )
     user_name = models.CharField(max_length=50, primary_key=True)
     first_name = models.CharField(max_length=30)

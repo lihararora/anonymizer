@@ -6,8 +6,10 @@ import hashlib
 from django.http.response import HttpResponse
 from xhtml2pdf import pisa
 import nlp
+import re
 
 #pass context_instance=RequestContext(request) as 3rd argument
+
 
 
 def index(request):
@@ -75,7 +77,8 @@ def save(request):
 def viewer(request, document_id):
     if "username" in request.session:
         if document_id != '':
-            return render_to_response('webapp/html/viewer.html',{"document_id":document_id},context_instance=RequestContext(request))
+            doc = getAnonymizedDocument(request,document_id)
+            return render_to_response('webapp/html/viewer.html',{"file_contents":doc.contents},context_instance=RequestContext(request))
         else:
             return redirect('/explorer/')
     else:
@@ -84,7 +87,7 @@ def viewer(request, document_id):
 def download(request, document_id):
     if "username" in request.session:
         if document_id != '':
-            doc = Document.objects.get(document_id = document_id)
+            doc = getAnonymizedDocument(request,document_id)
             response = HttpResponse(content_type='application/pdf')
             response['Content-Disposition'] = 'attachment; filename="%s"' % doc.file_name
             p = convertHtmlToPdf("<style> body { font-size: 14px; }</style>" + doc.contents, response)
@@ -100,3 +103,17 @@ def convertHtmlToPdf(sourceHtml, outputFile):
             sourceHtml,                # the HTML to convert
             dest=resultFile)           # file handle to recieve result
     return pisaStatus.err
+
+def getAnonymizedDocument(request, document_id):
+    doc = Document.objects.get(document_id = document_id)
+    anonymized_content = doc.contents
+    user = User.objects.get(user_name = request.session['username'])
+    level = int(user.role)
+    if level > 1:
+        anonymized_content = re.sub(r'<span class=\"level_1\">.*</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+    if level > 2:
+        anonymized_content = re.sub(r'<span class=\"level_2\">.*</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+    if level > 3:
+        anonymized_content = re.sub(r'<span class=\"level_3\">.*</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+    doc.contents = anonymized_content
+    return doc
