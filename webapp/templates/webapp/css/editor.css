@@ -41,3 +41,21 @@ div[data-role="editor-toolbar"] {
 	overflow-x: hidden;
 	height: 510px;
 }
+
+.level_1
+{
+	background: #e74c3c;
+	color: white;
+}
+
+.level_2
+{
+	background: #f39c12;
+	color: white;
+}
+
+.level_3
+{
+	background: #3498db;
+	color: white;
+}

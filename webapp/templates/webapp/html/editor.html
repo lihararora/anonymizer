@@ -79,6 +79,11 @@
 						  <a class="btn btn-default btn-sm" data-edit="undo" title="" data-original-title="Undo (Ctrl/Cmd+Z)"><i class="glyphicon glyphicon-repeat flipped"></i></a>
 						  <a class="btn btn-default btn-sm" data-edit="redo" title="" data-original-title="Redo (Ctrl/Cmd+Y)"><i class="glyphicon glyphicon-repeat"></i></a>
 						</div>
+						<div class="btn-group" style="float: right;">
+						  <a class="btn btn-danger btn-sm" title="" data-original-title="" href="javascript:replaceSelectedText('level_1');">Level 1</a>
+						  <a class="btn btn-warning btn-sm" title="" data-original-title="" href="javascript:replaceSelectedText('level_2');">Level 2</a>
+						  <a class="btn btn-info btn-sm" title="" data-original-title="" href="javascript:replaceSelectedText('level_3');" >Level 3</a>
+						</div>
 				    </div>
 					<div id="editor">{{ file_contents|safe }}</div>
 				</div>
