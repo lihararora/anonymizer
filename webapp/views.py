@@ -30,6 +30,10 @@ def editor(request):
     content = f.read()
     content = content.replace('\n', '<br/>')
     entities = nlp.get_names(content)
+    offset = 0
+    for entity in entities:
+        content[offset:] = content[offset:].replace(entity.name, "<span id=entity"+str(entity.id)+">"+entity.name+"</span>", 1)
+        offset = content.find(entity.name) + len(entity.name)
     if "username" in request.session:
         return render_to_response('webapp/html/editor.html',{"file_contents":content, "named_entities": entities},context_instance=RequestContext(request))
     else:
