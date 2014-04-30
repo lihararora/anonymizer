@@ -71,4 +71,6 @@ def get_names(text):
         text = text.replace(entity.name, "*"*len(entity.name), 1)
         entity.id = offset 
     
+    entities.sort(key=lambda x: x.id)
+    
     return entities
