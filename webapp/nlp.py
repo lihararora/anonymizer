@@ -1,11 +1,13 @@
 import nltk
+import re
 from nltk import sent_tokenize, word_tokenize, pos_tag, ne_chunk
 from pprint import pprint
 
 class Entity(object):
-    def __init__(self, name, type, sensitivity):
+    def __init__(self, name, type, id, sensitivity):
         self.name = name
         self.type = type
+        self.id = id
         self.sensitivity = sensitivity
 
 def get_names(text):
@@ -17,14 +19,13 @@ def get_names(text):
     person = []
     organization_list = []
     organization = []
-    location_list = []
-    location = []
-    date_list = []
-    date = []
     gpe_list = []
     gpe = []
     name = ""
-    for subtree in sentt.subtrees(filter=lambda t: t.node != None):
+    id = 0
+    for subtree in  sentt.subtrees(filter=lambda t: t.node != None):
+        print id
+        print subtree
         if subtree.node == "PERSON":
             for leaf in subtree.leaves():
                 person.append(leaf[0])
@@ -32,7 +33,8 @@ def get_names(text):
                 for part in person:
                     name += part + ' '
                 #if name[:-1] not in person_list:
-                entities.append(Entity(name[:-1], "Person", 0))
+                id = id + 1
+                entities.append(Entity(name[:-1], "Person", id, 0))
                 person_list.append(name[:-1])
                 name = ''
         person = []
@@ -43,7 +45,8 @@ def get_names(text):
                 for part in organization:
                     name += part + ' '
                 #if name[:-1] not in organization_list:
-                entities.append(Entity(name[:-1], "Organization", 0))
+                id = id + 1
+                entities.append(Entity(name[:-1], "Organization", id, 0))
                 organization_list.append(name[:-1])
                 name = ''
         organization = []
@@ -54,8 +57,20 @@ def get_names(text):
                 for part in gpe:
                     name += part + ' '
                 #if name[:-1] not in gpe_list:
-                entities.append(Entity(name[:-1], "Geo Entity", 0))
+                id = id + 1
+                entities.append(Entity(name[:-1], "Geo Entity", id, 0))
                 gpe_list.append(name[:-1])
                 name = ''
         gpe = []
+        
+    dates = []
+    dates = re.findall(r'(\d{2}[/.-]\d{2}[/.-]\d{4})', text)
+    for date in dates:
+        id = id + 1
+        entities.append(Entity(date, "Date", id, 0))
+    dates = []
+    dates = re.findall(r'(\d{4}[/.-]\d{2}[/.-]\d{2})', text)
+    for date in dates:
+        id = id + 1
+        entities.append(Entity(date, "Date",id , 0))    
     return entities
