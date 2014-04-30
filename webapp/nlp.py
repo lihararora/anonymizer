@@ -64,7 +64,23 @@ def get_names(text):
     dates = []
     dates = re.findall(r'(\d{4}[/.-]\d{2}[/.-]\d{2})', text)
     for date in dates:
-        entities.append(Entity(date, "Date", 0))    
+        entities.append(Entity(date, "Date", 0))
+    dates = []
+    dates = re.findall(r'\d\d\s(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-zA-Z]{0,6}\s\d{4}|(?:Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)[a-zA-Z]{0,6}\s\d{2,4}', text, re.IGNORECASE)
+    for date in dates:
+        entities.append(Entity(date, "Date", 0))
+    times = []
+    times = re.findall(r'([0-2][0-9]:[0-5]\d)', text)
+    for time in times:
+        entities.append(Entity(time, "Time", 0))
+    phones = []
+    phones = re.findall(r'([0-9]{3}-[0-9]{3}-[0-9]{4})', text)
+    for phone in phones:
+        entities.append(Entity(phone, "Phone", 0))  
+    emails = []
+    emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]', text)
+    for email in emails:
+        entities.append(Entity(email, "Email Id", 0))  
     
     for entity in entities:
         offset = text.find(entity.name)
