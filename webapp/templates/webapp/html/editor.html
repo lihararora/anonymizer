@@ -14,6 +14,13 @@
     	<script type="text/javascript" src="/static/bootstrap/js/jquery.hotkeys.js"></script>
     	<script type="text/javascript" src="/static/bootstrap/js/slimscroll.js"></script>
     	<script type="text/javascript" src="/static/bootstrap/js/bootstrap.min.js"></script>
+    	<style type="text/css">
+    		.entity_row:HOVER td
+    		{
+    			background-color: #ccc !important;
+    			cursor: pointer;
+    		}
+    	</style>
   	</head>
   	<body>
 		<div class="container-fluid">
@@ -98,7 +105,7 @@
 					<div id="entity_scroll">
 						<table class="table table-striped">
 							{% for entity in named_entities %}
-								<tr>
+								<tr class="entity_row" id="entity_row_{{ entity.id }}" onclick="select(this)">
 									<td style="width: 40% !important">{{entity.name}}</td>
 									<td style="width: 40% !important">{{entity.type}}</td>
 									<td style="width: 20% !important">{{entity.sensitivity}}</td>
@@ -169,6 +176,40 @@
 	    		c = document.getElementById('editor').innerHTML;
 	    		document.getElementById('content').value = c;
 	    		return true;
+	    	}
+	    	
+	    	function select(row)
+	    	{
+	    		var row_id = row.id;
+	    		var element = row_id.replace("entity_row_","entity")
+	    		var doc = document
+			        , text = doc.getElementById(element)
+			        , range, selection
+			    ;    
+			    if (doc.body.createTextRange) { //ms
+			        range = doc.body.createTextRange();
+			        range.moveToElementText(text);
+			        range.select();
+			    } else if (window.getSelection) { //all others
+			        selection = window.getSelection();        
+			        range = doc.createRange();
+			        range.selectNodeContents(text);
+			        selection.removeAllRanges();
+			        selection.addRange(range);
+			    }
+			    
+			    $('#editor').animate({
+			        scrollTop: $("#"+element).parent().scrollTop() + $("#"+element).offset().top - $("#"+element).parent().offset().top - 50
+			    }, {
+			        duration: 500,
+			        specialEasing: {
+			            width: 'linear',
+			            height: 'easeOutBounce'
+			        }
+			    });
+			    //var eleobj = document.getElementById(element)
+			    //eleobj.parentNode.scrollTop = eleobj.offsetTop - eleobj.parentNode.offsetTop;
+			    //$('#editor').animate({scrollTop: $("#"+element).offset().top - $("#editor").offset().top}, 800);
 	    	}
 	    </script>
 	</body>

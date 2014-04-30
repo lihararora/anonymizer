@@ -30,10 +30,17 @@ def editor(request):
     content = f.read()
     content = content.replace('\n', '<br/>')
     entities = nlp.get_names(content)
-    offset = 0
+    old_offset = 0
+    contents = ""
     for entity in entities:
-        content[offset:] = content[offset:].replace(entity.name, "<span id=entity"+str(entity.id)+">"+entity.name+"</span>", 1)
-        offset = content.find(entity.name) + len(entity.name)
+        temp = "<span id='entity"+str(entity.id)+"'>"+entity.name+"</span>"
+        print temp,
+        new_offset = old_offset + content[old_offset:].find(entity.name) + len(entity.name)
+        print new_offset
+        contents += content[old_offset:new_offset].replace(entity.name, temp, 1)
+        old_offset = new_offset
+    contents += content[old_offset:]
+    content= contents
     if "username" in request.session:
         return render_to_response('webapp/html/editor.html',{"file_contents":content, "named_entities": entities},context_instance=RequestContext(request))
     else:
@@ -82,7 +89,7 @@ def viewer(request, document_id):
     if "username" in request.session:
         if document_id != '':
             doc = getAnonymizedDocument(request,document_id)
-            return render_to_response('webapp/html/viewer.html',{"file_contents":doc.contents},context_instance=RequestContext(request))
+            return render_to_response('webapp/html/viewer.html',{"file_contents":doc.contents, "document_id":document_id},context_instance=RequestContext(request))
         else:
             return redirect('/explorer/')
     else:

@@ -4,10 +4,10 @@ from nltk import sent_tokenize, word_tokenize, pos_tag, ne_chunk
 from pprint import pprint
 
 class Entity(object):
-    def __init__(self, name, type, id, sensitivity):
+    def __init__(self, name, type, sensitivity):
         self.name = name
         self.type = type
-        self.id = id
+        self.id = 0
         self.sensitivity = sensitivity
 
 def get_names(text):
@@ -22,10 +22,7 @@ def get_names(text):
     gpe_list = []
     gpe = []
     name = ""
-    id = 0
     for subtree in  sentt.subtrees(filter=lambda t: t.node != None):
-        print id
-        print subtree
         if subtree.node == "PERSON":
             for leaf in subtree.leaves():
                 person.append(leaf[0])
@@ -33,8 +30,7 @@ def get_names(text):
                 for part in person:
                     name += part + ' '
                 #if name[:-1] not in person_list:
-                id = id + 1
-                entities.append(Entity(name[:-1], "Person", id, 0))
+                entities.append(Entity(name[:-1], "Person", 0))
                 person_list.append(name[:-1])
                 name = ''
         person = []
@@ -45,8 +41,7 @@ def get_names(text):
                 for part in organization:
                     name += part + ' '
                 #if name[:-1] not in organization_list:
-                id = id + 1
-                entities.append(Entity(name[:-1], "Organization", id, 0))
+                entities.append(Entity(name[:-1], "Organization", 0))
                 organization_list.append(name[:-1])
                 name = ''
         organization = []
@@ -57,8 +52,7 @@ def get_names(text):
                 for part in gpe:
                     name += part + ' '
                 #if name[:-1] not in gpe_list:
-                id = id + 1
-                entities.append(Entity(name[:-1], "Geo Entity", id, 0))
+                entities.append(Entity(name[:-1], "Geo Entity", 0))
                 gpe_list.append(name[:-1])
                 name = ''
         gpe = []
@@ -66,11 +60,15 @@ def get_names(text):
     dates = []
     dates = re.findall(r'(\d{2}[/.-]\d{2}[/.-]\d{4})', text)
     for date in dates:
-        id = id + 1
-        entities.append(Entity(date, "Date", id, 0))
+        entities.append(Entity(date, "Date", 0))
     dates = []
     dates = re.findall(r'(\d{4}[/.-]\d{2}[/.-]\d{2})', text)
     for date in dates:
-        id = id + 1
-        entities.append(Entity(date, "Date",id , 0))    
+        entities.append(Entity(date, "Date", 0))    
+    
+    for entity in entities:
+        offset = text.find(entity.name)
+        text = text.replace(entity.name, "*"*len(entity.name), 1)
+        entity.id = offset 
+    
     return entities
