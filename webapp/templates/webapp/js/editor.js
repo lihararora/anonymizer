@@ -204,7 +204,7 @@ function replaceSelectedText(className) {
     if (window.getSelection) {
         sel = window.getSelection();
         if (sel.rangeCount) {
-        	var container = document.createElement("span");
+        	var container = document.createElement("span1");
             for (var i = 0, len = sel.rangeCount; i < len; ++i) {
                 container.appendChild(sel.getRangeAt(i).cloneContents());
             }

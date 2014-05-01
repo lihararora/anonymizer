@@ -122,10 +122,10 @@ def getAnonymizedDocument(request, document_id):
     level = int(user.role)
     print anonymized_content
     if level > 1:
-        anonymized_content = re.sub(r'<span class=\"level_1\">(.|\n)*?</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+        anonymized_content = re.sub(r'<span1 class=\"level_1\">(.|\n)*?</span1>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
     if level > 2:
-        anonymized_content = re.sub(r'<span class=\"level_2\">(.|\n)*?</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+        anonymized_content = re.sub(r'<span1 class=\"level_2\">(.|\n)*?</span1>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
     if level > 3:
-        anonymized_content = re.sub(r'<span class=\"level_3\">(.|\n)*?</span>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
+        anonymized_content = re.sub(r'<span1 class=\"level_3\">(.|\n)*?</span1>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
     doc.contents = anonymized_content
     return doc
