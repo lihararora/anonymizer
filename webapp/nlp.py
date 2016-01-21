@@ -22,8 +22,8 @@ def get_names(text):
     gpe_list = []
     gpe = []
     name = ""
-    for subtree in  sentt.subtrees(filter=lambda t: t.node != None):
-        if subtree.node == "PERSON":
+    for subtree in  sentt.subtrees(filter=lambda t: t.label() != None):
+        if subtree.label() == "PERSON":
             for leaf in subtree.leaves():
                 person.append(leaf[0])
             if len(person) > 0:
@@ -34,7 +34,7 @@ def get_names(text):
                 person_list.append(name[:-1])
                 name = ''
         person = []
-        if subtree.node == "ORGANIZATION":
+        if subtree.label() == "ORGANIZATION":
             for leaf in subtree.leaves():
                 organization.append(leaf[0])
             if len(organization) > 0:
@@ -45,7 +45,7 @@ def get_names(text):
                 organization_list.append(name[:-1])
                 name = ''
         organization = []
-        if subtree.node == "GPE":
+        if subtree.label() == "GPE":
             for leaf in subtree.leaves():
                 gpe.append(leaf[0])
             if len(gpe) > 0:
@@ -56,7 +56,7 @@ def get_names(text):
                 gpe_list.append(name[:-1])
                 name = ''
         gpe = []
-        
+
     dates = []
     dates = re.findall(r'(\d{2}[/.-]\d{2}[/.-]\d{4})', text)
     for date in dates:
@@ -76,17 +76,17 @@ def get_names(text):
     phones = []
     phones = re.findall(r'([0-9]{3}-[0-9]{3}-[0-9]{4})', text)
     for phone in phones:
-        entities.append(Entity(phone, "Phone"))  
+        entities.append(Entity(phone, "Phone"))
     emails = []
     emails = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]', text)
     for email in emails:
-        entities.append(Entity(email, "Email Id"))  
-    
+        entities.append(Entity(email, "Email Id"))
+
     for entity in entities:
         offset = text.find(entity.name)
         text = text.replace(entity.name, "*"*len(entity.name), 1)
-        entity.id = offset 
-    
+        entity.id = offset
+
     entities.sort(key=lambda x: x.id)
-    
+
     return entities
