@@ -120,7 +120,7 @@ def getAnonymizedDocument(request, document_id):
     anonymized_content = doc.contents
     user = User.objects.get(user_name = request.session['username'])
     level = int(user.role)
-    print anonymized_content
+	#print anonymized_content
     if level > 1:
         anonymized_content = re.sub(r'<span1 class=\"level_1\">(.|\n)*?</span1>', r"&lt;&lt;AUTHORIZATION REQUIRED TO VIEW THIS LINE&gt;&gt;", anonymized_content)
     if level > 2:
