@@ -34,9 +34,9 @@ def editor(request):
     contents = ""
     for entity in entities:
         temp = "<span id='entity"+str(entity.id)+"'>"+entity.name+"</span>"
-        print temp,
+        #print temp,
         new_offset = old_offset + content[old_offset:].find(entity.name) + len(entity.name)
-        print new_offset
+        #print new_offset
         contents += content[old_offset:new_offset].replace(entity.name, temp, 1)
         old_offset = new_offset
     contents += content[old_offset:]
